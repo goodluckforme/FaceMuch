@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.isnc.facesdk.SuperID
 import com.isnc.facesdk.common.Cache
 import com.isnc.facesdk.common.SDKConfig
+import com.networkbench.agent.impl.NBSAppAgent
 import com.pascalwelsch.extensions.launchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         SharedPreferencesUtil.init(this,packageName, Context.MODE_PRIVATE)
         Log.i("MainActivity", sHA1(this))
+        NBSAppAgent.setLicenseKey("b916676062a64ec58dc343ff7f6b7cc8 ").withLocationServiceEnabled(true).start(this.applicationContext)
+
         SuperID.initFaceSDK(this)
         SuperID.setDebugMode(true)
         SuperID.isUidAuthorized(this, SharedPreferencesUtil.getInstance().getString("openid"), { result ->
